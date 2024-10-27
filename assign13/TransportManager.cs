@@ -38,16 +38,30 @@ namespace assign13
                 .ToDictionary(g => g.Key, g => g.ToList());
         }
 
-        //public List<TransportSchedule> OrderSchedules(string orderBy)
-        //{
-        //    return orderBy.ToLower() switch
-        //    {
-        //        "departuretime" => schedules.OrderBy(s => s.DepartureTime).ToList(),
-        //        "price" => schedules.OrderBy(s => s.Price).ToList(),
-        //        "seatsavailable" => schedules.OrderBy(s => s.SeatsAvailable).ToList(),
-        //        _ => schedules // Return unsorted if no valid criteria are specified
-        //    };
-        //}
+
+        public List<TransportSchedule> OrderSchedules(string orderBy)
+        {
+            orderBy = orderBy.ToLower();
+
+            switch (orderBy)
+            {
+                case "departuretime":
+                    return schedules.OrderBy(s => s.DepartureTime).ToList();
+
+                case "price":
+                    return schedules.OrderBy(s => s.Price).ToList();
+
+                case "seatsavailable":
+                    return schedules.OrderBy(s => s.SeatsAvailable).ToList();
+
+                default:
+                    return schedules; // Return unsorted if no valid criteria are specified
+            }
+        }
+
+
+
+
 
         public List<TransportSchedule> FilterSchedules(int? minSeatsAvailable = null, DateTime? startTime = null, DateTime? endTime = null)
         {
